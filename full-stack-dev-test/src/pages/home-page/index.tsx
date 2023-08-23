@@ -1,6 +1,3 @@
-import { ToastContainer } from "react-toastify";
-import { useState } from "react";
-
 export const HomePage = () => {
 	return (
 		<div className="flex flex-col md:flex-row">
