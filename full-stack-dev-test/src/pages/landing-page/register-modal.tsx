@@ -198,17 +198,6 @@ export const RegisterModal = ({
 												)}
 											</button>
 										</div>
-										{/* {!eligiblePass && (
-											<div className="w-full rounded-md bg-yellow-600 p-2 mt-5">
-												<span className="text-white text-sm text-center">
-													Should contains at least{" "}
-													<b>1 lower-case</b>,{" "}
-													<b>1 upper-case</b>, and{" "}
-													<b>1 number</b> with 8
-													character minimum
-												</span>
-											</div>
-										)} */}
 										<div className="flex flex-col">
 											<label
 												htmlFor="confirmPassword"
