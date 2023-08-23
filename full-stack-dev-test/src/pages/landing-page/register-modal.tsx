@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { BASEAPI_URL } from "../../constant";
 
 interface RegisterModalProps {
 	isOpen: boolean;
@@ -63,34 +64,33 @@ export const RegisterModal = ({
 		console.log("Email:", email);
 		console.log("Password:", password);
 		console.log("Confirm Password:", confirmPassword);
-		// if (!passwordRegex.test(password)) {
-		// 	toast.error(
-		// 		"Password need to contains at least 1 lower-case, 1 upper-case, and 1 number with 8 character minimum"
-		// 	);
-		// 	return;
-		// } else if (password !== confirmPassword) {
-		// 	toast.error("Password and Confirm Password must be the same");
-		// 	return;
-		// }
-		// try {
-		// 	// If the password and confirm password is the same, then perform register logic here
-		// 	const response = await axios.post(BASEAPI_URL + "/auth/register", {
-		// 		name: name,
-		// 		email: email,
-		// 		password: password,
-		// 		company_name: companyName,
-		// 	});
-		// 	console.log(response);
-		// 	toast.success(response.data.message);
-		// 	onClose();
-		// } catch (err: any) {
-		// 	if (err.response && err.response.status === 400) {
-		// 		const errorMessage = err.response.data.message;
-		// 		toast.error(errorMessage);
-		// 	} else {
-		// 		toast.error("An error occurred. Please try again.");
-		// 	}
-		// }
+		if (!passwordRegex.test(password)) {
+			toast.error(
+				"Password need to contains at least 1 lower-case, 1 upper-case, and 1 number with 8 character minimum"
+			);
+			return;
+		} else if (password !== confirmPassword) {
+			toast.error("Password and Confirm Password must be the same");
+			return;
+		}
+		try {
+			// If the password and confirm password is the same, then perform register logic here
+			const response = await axios.post(BASEAPI_URL + "/auth/register", {
+				name: name,
+				email: email,
+				password: password,
+			});
+			console.log(response);
+			toast.success(response.data.message);
+			onClose();
+		} catch (err: any) {
+			if (err.response && err.response.status === 400) {
+				const errorMessage = err.response.data.message;
+				toast.error(errorMessage);
+			} else {
+				toast.error("An error occurred. Please try again.");
+			}
+		}
 	};
 
 	return (

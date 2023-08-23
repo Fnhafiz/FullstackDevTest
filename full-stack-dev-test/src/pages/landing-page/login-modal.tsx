@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { BASEAPI_URL } from "../../constant";
 
 interface LoginModalProps {
 	isOpen: boolean;
@@ -39,33 +40,33 @@ export const LoginModal = ({
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		// Perform login logic here
-		// try {
-		// 	console.log("masuk");
-		// 	const response = await axios.post(BASEAPI_URL + "/auth/login", {
-		// 		email: email,
-		// 		password: password,
-		// 	});
+		try {
+			console.log("masuk");
+			const response = await axios.post(BASEAPI_URL + "/auth/login", {
+				email: email,
+				password: password,
+			});
 
-		// 	//get the response
-		// 	//if not error, set the local storage
-		// 	console.log(response.data.data);
-		// 	// Convert the JSON object to a string
-		// 	const userJSONString = JSON.stringify(response.data.data);
+			//get the response
+			//if not error, set the local storage
+			console.log(response.data.data);
+			// Convert the JSON object to a string
+			const userJSONString = JSON.stringify(response.data.data);
 
-		// 	// Save the JSON string to localStorage
-		// 	localStorage.setItem("@manager/user", userJSONString);
+			// Save the JSON string to localStorage
+			localStorage.setItem("@manager/user", userJSONString);
 
-		// 	toast.success("Login successful!");
-		// 	onClose();
-		// 	window.location.href = "/dashboard";
-		// } catch (err: any) {
-		// 	if (err.response && err.response.status === 400) {
-		// 		const errorMessage = err.response.data.message;
-		// 		toast.error(errorMessage);
-		// 	} else {
-		// 		toast.error("An error occurred. Please try again.");
-		// 	}
-		// }
+			toast.success("Login successful!");
+			onClose();
+			window.location.href = "/home";
+		} catch (err: any) {
+			if (err.response && err.response.status === 400) {
+				const errorMessage = err.response.data.message;
+				toast.error(errorMessage);
+			} else {
+				toast.error("An error occurred. Please try again.");
+			}
+		}
 	};
 
 	return (

@@ -3,6 +3,8 @@ import { useState } from "react";
 import { LoginModal } from "./login-modal";
 import { RegisterModal } from "./register-modal";
 
+import "react-toastify/dist/ReactToastify.css";
+
 export const LandingPage = () => {
 	const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 	const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
@@ -36,7 +38,7 @@ export const LandingPage = () => {
 			</div>
 			<div className="w-full md:w-2/5 h-screen flex flex-col items-center justify-center px-24">
 				<button
-					className="w-full lg:w-3/5 bg-purple-600 hover:bg-purple-400 text-white text-2xl font-bold py-3 px-4 rounded-md"
+					className="w-full lg:w-3/5 bg-purple-600 hover:bg-purple-700 text-white text-2xl font-bold py-3 px-4 rounded-md"
 					onClick={openLoginModal}
 				>
 					Login
@@ -54,7 +56,7 @@ export const LandingPage = () => {
 				/>
 
 				<button
-					className="w-full lg:w-3/5 bg-purple-600 hover:bg-purple-400 text-white text-2xl font-bold py-3 px-4 rounded-md mt-8"
+					className="w-full lg:w-3/5 bg-purple-600 hover:bg-purple-700 text-white text-2xl font-bold py-3 px-4 rounded-md mt-8"
 					onClick={openRegisterModal}
 				>
 					Register
@@ -70,6 +72,7 @@ export const LandingPage = () => {
 					openRegisterModal={openRegisterModal}
 				/>
 			</div>
+			<ToastContainer />
 		</div>
 	);
 };
