@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { BASEAPI_URL } from "../../constant";
 
+// Interface for the props of the LoginModal component
 interface LoginModalProps {
 	isOpen: boolean;
 	onClose: () => void;
@@ -16,6 +17,7 @@ export const LoginModal = ({
 	onClose,
 	openRegisterModal,
 }: LoginModalProps) => {
+	// const for the email and password
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
@@ -25,6 +27,7 @@ export const LoginModal = ({
 		openRegisterModal(); // Open the RegisterModal
 	};
 
+	// Function to handle the change of the email and password
 	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setEmail(e.target.value);
 	};
@@ -33,15 +36,15 @@ export const LoginModal = ({
 		setPassword(e.target.value);
 	};
 
+	// Function to toggle the show password
 	const toggleShowPassword = () => {
 		setShowPassword(!showPassword);
 	};
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// Perform login logic here
 		try {
-			console.log("masuk");
+			// Send the request to the server
 			const response = await axios.post(BASEAPI_URL + "/auth/login", {
 				email: email,
 				password: password,
@@ -61,9 +64,11 @@ export const LoginModal = ({
 			window.location.href = "/home";
 		} catch (err: any) {
 			if (err.response && err.response.status === 400) {
+				// Bad request
 				const errorMessage = err.response.data.message;
 				toast.error(errorMessage);
 			} else {
+				// Other errors
 				toast.error("An error occurred. Please try again.");
 			}
 		}

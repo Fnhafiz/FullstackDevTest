@@ -1,3 +1,4 @@
+//this is homePage after login
 export const HomePage = () => {
 	return (
 		<div className="flex flex-col md:flex-row">

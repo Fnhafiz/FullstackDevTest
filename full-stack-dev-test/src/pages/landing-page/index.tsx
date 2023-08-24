@@ -5,10 +5,13 @@ import { RegisterModal } from "./register-modal";
 
 import "react-toastify/dist/ReactToastify.css";
 
+// this is the main LandingPage
 export const LandingPage = () => {
+	//const for boolean of the login and register modal
 	const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 	const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
+	//function to open and close the login and register modal
 	const openLoginModal = () => {
 		setLoginModalOpen(true);
 	};
@@ -43,6 +46,7 @@ export const LandingPage = () => {
 				>
 					Login
 				</button>
+				{/* Render the LoginModal component */}
 				<LoginModal
 					isOpen={isLoginModalOpen}
 					onClose={closeLoginModal}
@@ -61,17 +65,20 @@ export const LandingPage = () => {
 				>
 					Register
 				</button>
+				{/* Render the RegisterModal component */}
 				<RegisterModal
 					isOpen={isRegisterModalOpen}
 					onClose={closeRegisterModal}
 					openLoginModal={openLoginModal}
 				/>
+				{/* Render the LoginModal component */}
 				<LoginModal
 					isOpen={isLoginModalOpen}
 					onClose={closeLoginModal}
 					openRegisterModal={openRegisterModal}
 				/>
 			</div>
+			{/* ToastContainer to show the toastify return when login/register */}
 			<ToastContainer />
 		</div>
 	);

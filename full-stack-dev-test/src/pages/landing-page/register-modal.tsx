@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { BASEAPI_URL } from "../../constant";
 
+// Interface for the props of the RegisterModal component
 interface RegisterModalProps {
 	isOpen: boolean;
 	onClose: () => void;
@@ -16,12 +17,15 @@ export const RegisterModal = ({
 	onClose,
 	openLoginModal,
 }: RegisterModalProps) => {
+	// const for the name, email, password, and confirm password
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+	// Regex for password
 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
 	const handleLoginClick = () => {
@@ -29,6 +33,7 @@ export const RegisterModal = ({
 		openLoginModal(); // Open the LoginModal
 	};
 
+	// Function to handle the change of the name, email, password, and confirm password
 	const handleCloseModal = () => {
 		onClose();
 	};
@@ -59,11 +64,8 @@ export const RegisterModal = ({
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// Perform login logic here
-		console.log("Name:", name);
-		console.log("Email:", email);
-		console.log("Password:", password);
-		console.log("Confirm Password:", confirmPassword);
+
+		// Check if the password and confirm password is the same
 		if (!passwordRegex.test(password)) {
 			toast.error(
 				"Password need to contains at least 1 lower-case, 1 upper-case, and 1 number with 8 character minimum"
@@ -74,7 +76,7 @@ export const RegisterModal = ({
 			return;
 		}
 		try {
-			// If the password and confirm password is the same, then perform register logic here
+			// Send the request to the server
 			const response = await axios.post(BASEAPI_URL + "/auth/register", {
 				name: name,
 				email: email,
